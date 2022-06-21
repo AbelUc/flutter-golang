@@ -1,0 +1,39 @@
+import 'dart:io';
+
+import 'package:get/get.dart';
+class DataService extends GetConnect implements GetxService{
+
+  Future<Response> getData()async {
+    Response response = await get(
+      "http://localhost:8082/getbooks",
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    );
+
+    return response;
+  }
+  Future<Response> postData(dynamic body) async {
+    Response response = await post(
+      "http://localhost:8082/create",
+      body,
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    );
+    return response;
+  }
+  Future<Response> deleteData(int id) async {
+
+    Response response = await delete(
+      '${"http://localhost:8082/delete/"}$id',
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    );
+    return response;
+  }
+  Future<Response> updateData(int id, dynamic body) async {
+
+    Response response = await put(
+      '${"http://localhost:8082/update/"}$id',
+      body,
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    );
+    return response;
+  }
+}
